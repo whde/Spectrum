@@ -34,7 +34,7 @@
     
     __weak ViewController *weakSelf = self;
     //Example 3
-    self.spectrumView3 = [[SpectrumView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.view.bounds)-150,190,300, 60.0)];
+    self.spectrumView3 = [[SpectrumView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.view.bounds)-150,190,300, 120)];
     self.spectrumView3.itemLevelCallback = ^() {
         
         /*
@@ -223,7 +223,7 @@
                 } else if (w < -32768) {
                     w = -32768;
                 }
-                float y =  w / 32767.0 *10;
+                float y =  w / 32767.0;
                 [dataArr addObject:@(fabsf(y))];
             }
         }

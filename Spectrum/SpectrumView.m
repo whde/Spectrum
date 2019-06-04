@@ -135,8 +135,8 @@
         [linePathLeft addLineToPoint:CGPointMake(leftX, lineTop)];
         CAShapeLayer *itemLine = [self deqLayer];
         itemLine.path = [linePathLeft CGPath];
-        itemLine.strokeStart = 0;
-        itemLine.strokeEnd = 0.1;
+        itemLine.strokeStart = 0.48;
+        itemLine.strokeEnd = 0.52;
     }
     UIGraphicsEndImageContext();
 }
@@ -157,9 +157,12 @@
     NSInteger num = MIN(_levels.count, layers.count);
     for (int i=0; i<num; i++) {
         CAShapeLayer *layer = [layers objectAtIndex:i];
-        CGFloat level = [_levels[i] floatValue];
-        layer.strokeStart = 0;
-        layer.strokeEnd = 0.1+level;
+        // CGFloat rate = sin(i/M_PI*10/_levels.count);
+        CGFloat preRate = 0.2+i*1.0/self.levels.count*0.6;
+        CGFloat rate = 2/(0.4*sqrtf(2*M_PI))*exp(-powf(((preRate/0.3)-1.6), 2)/(2*powf(0.4, 2)));
+        CGFloat level = [_levels[i] floatValue]*rate;
+        layer.strokeStart = 0.48-level;
+        layer.strokeEnd = 0.52+level;
         /*
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             layer.strokeStart = 0;
